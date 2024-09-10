@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "NovelAI Prompt Manager",
+  "version": "1.0",
+  "description": "Manage and inject prompts for NovelAI with advanced features",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://novelai.net/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    {
+      "resources": ["popup.css"],
+      "matches": ["https://novelai.net/*"]
+    }
+  ]
+}

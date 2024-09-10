@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="top-buttons">
+      <button id="openNovelAI" class="icon-button" title="NovelAIを開く">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+      </button>
+      <button id="helpButton" class="icon-button" title="ヘルプ">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+          <line x1="12" y1="17" x2="12" y2="17"></line>
+        </svg>
+      </button>
+      <button id="openOptions" class="icon-button" title="設定を開く">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <div id="savedStylesLabel" class="label">保存されたスタイル (複数選択可能)</div>
+        <select id="styleSelect" multiple></select>
+        
+        <div class="input-container">
+          <label for="styleTitleInput">スタイルタイトル</label>
+          <input type="text" id="styleTitleInput" />
+          <button class="clear-button" data-target="styleTitleInput">&times;</button>
+        </div>
+        
+        <div class="input-container">
+          <label for="tempPromptArea">一時的なプロンプト</label>
+          <textarea id="tempPromptArea"></textarea>
+          <button class="clear-button" data-target="tempPromptArea">&times;</button>
+        </div>
+        
+        <div class="input-container">
+          <label for="tempExcludeArea">一時的な除外要素</label>
+          <textarea id="tempExcludeArea"></textarea>
+          <button class="clear-button" data-target="tempExcludeArea">&times;</button>
+        </div>
+
+        <div class="button-container">
+          <button id="saveStyle" class="green-button">スタイルを保存</button>
+          <button id="deleteStyle" class="green-button">スタイルを削除</button>
+        </div>
+        <div class="button-container">
+          <button id="loadToTemp" class="green-button">スタイルを編集</button>
+        </div>
+      </div>
+      
+      <div class="column">
+        <div id="finalPromptLabel" class="label">最終プロンプト</div>
+        <div id="finalPrompt" class="final-content"></div>
+        
+        <div id="finalExcludeLabel" class="label">最終除外要素</div>
+        <div id="finalExclude" class="final-content"></div>
+                
+        <div class="button-container">
+          <button id="injectPrompt" class="green-button">NovelAIに注入</button>
+          <button id="fetchPrompt" class="green-button">NovelAIから取得</button>
+        </div>
+        <div class="button-container">
+          <button id="clearPrompts" class="red-button">プロンプトをクリア</button>
+          <button id="generateSingle" class="red-button">1枚生成</button>
+        </div>
+        <div class="button-container">
+          <select id="generateCount">
+            <option value="2">2枚</option>
+            <option value="3">3枚</option>
+            <option value="4">4枚</option>
+            <option value="5">5枚</option>
+            <option value="10">10枚</option>
+          </select>
+          <button id="generateMultiple" class="red-button">複数枚生成</button>
+        </div>
+        <div class="button-container">
+          <button id="exportStyles" class="green-button">スタイルをエクスポート</button>
+          <button id="importStyles" class="green-button">スタイルをインポート</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
+  <input type="file" id="importFile" style="display: none;">
+  
+  <div id="helpModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>How to use NovelAI Prompt Manager</h2>
+      <p>1. Save your favorite prompts as styles...</p>
+      <p>2. Select multiple styles to combine...</p>
+      <p>3. Use temporary prompts for one-time additions...</p>
+      <!-- 他の使い方説明を追加 -->
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
