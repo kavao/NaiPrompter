@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const generateCountSelect = document.getElementById('generateCount');
   const generateCountOptions = [2, 3, 4, 5, 10];
 
-  let currentLanguage = 'ja';  // デフォルト言語を日本語に設定
+  let currentLanguage = 'en';  // デフォルト言語を英語に設定
 
   const translations = {
     en: {
@@ -41,7 +41,9 @@ document.addEventListener('DOMContentLoaded', function() {
       clearPrompts: "Clear Prompts",
       generateSingle: "Generate Single",
       loadToTemp: "Edit Style",
-      styleTitleInput: "Style Title",
+      styleTitle: "Style Title",
+      temporaryPrompt: "Temporary Prompt",
+      temporaryExclude: "Temporary Exclude",
       openNovelAI: "Open NovelAI",
       help: "Help",
       openOptions: "Open Settings",
@@ -64,7 +66,9 @@ document.addEventListener('DOMContentLoaded', function() {
       clearPrompts: "プロンプトをクリア",
       generateSingle: "1枚生成",
       loadToTemp: "スタイルを編集",
-      styleTitleInput: "スタイルタイトル",
+      styleTitle:"スタイルタイトル",
+      temporaryPrompt:"一時的なプロンプト",
+      temporaryExclude:"一時的な除外要素",
       openNovelAI: "NovelAIを開く",
       help: "ヘルプ",
       openOptions: "設定を開く",
@@ -127,13 +131,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   restoreFormState();
-
-  function updateLanguage() {
-    chrome.storage.sync.get(['language'], function(result) {
-      currentLanguage = result.language || 'ja';
-      updateLabels();
-    });
-  }
   
   function updateGenerateCountOptions(lang) {
     const select = document.getElementById('generateCount');
@@ -154,6 +151,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 存在する要素のみを更新
     const elementsToUpdate = {
+      'styleTitleLabel': 'styleTitle',
+      'temporaryPromptLabel': 'temporaryPrompt',
+      'temporaryExcludeLabel': 'temporaryExclude',
       'savedStylesLabel': 'savedStyles',
       'finalPromptLabel': 'finalPrompt',
       'finalExcludeLabel': 'finalExclude',
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // 言語設定を読み込み、UIを更新する
   chrome.storage.sync.get(['language'], function(result) {
-    const lang = result.language || 'ja';
+    const lang = result.language || currentLanguage;
     updateLanguage(lang);
   });
 
@@ -554,6 +554,27 @@ document.addEventListener('DOMContentLoaded', function() {
         targetElement.dispatchEvent(new Event('input', { bubbles: true }));
       }
     });
+  });
+
+  // 内部コンソール用の関数を追加
+  function updateInternalConsole(message) {
+    const consoleElement = document.getElementById('internal-console');
+    const logEntry = document.createElement('div');
+    logEntry.textContent = message;
+    consoleElement.appendChild(logEntry);
+    consoleElement.scrollTop = consoleElement.scrollHeight;
+
+    // 最大5行まで表示
+    while (consoleElement.childElementCount > 5) {
+      consoleElement.removeChild(consoleElement.firstChild);
+    }
+  }
+
+  // メッセージリスナーを追加
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === 'updateConsole') {
+      updateInternalConsole(message.text);
+    }
   });
 
 });

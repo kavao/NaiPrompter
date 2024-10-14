@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="popup.css">
+  <title>NaiPrompter</title>
 </head>
 <body>
   <div class="container">
@@ -33,19 +34,19 @@
         <select id="styleSelect" multiple></select>
         
         <div class="input-container">
-          <label for="styleTitleInput">スタイルタイトル</label>
+          <label for="styleTitleInput" id="styleTitleLabel">スタイルタイトル</label>
           <input type="text" id="styleTitleInput" />
           <button class="clear-button" data-target="styleTitleInput">&times;</button>
         </div>
         
         <div class="input-container">
-          <label for="tempPromptArea">一時的なプロンプト</label>
+          <label for="tempPromptArea" id="temporaryPromptLabel">一時的なプロンプト</label>
           <textarea id="tempPromptArea"></textarea>
           <button class="clear-button" data-target="tempPromptArea">&times;</button>
         </div>
         
         <div class="input-container">
-          <label for="tempExcludeArea">一時的な除外要素</label>
+          <label for="tempExcludeArea" id="temporaryExcludeLabel">一時的な除外要素</label>
           <textarea id="tempExcludeArea"></textarea>
           <button class="clear-button" data-target="tempExcludeArea">&times;</button>
         </div>
@@ -88,7 +89,9 @@
           <button id="exportStyles" class="green-button">スタイルをエクスポート</button>
           <button id="importStyles" class="green-button">スタイルをインポート</button>
         </div>
-
+        <!-- 内部コンソールを追加 -->
+        <div id="internal-console"></div>
+        
       </div>
     </div>
   </div>

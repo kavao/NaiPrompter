@@ -1,68 +1,56 @@
-# NovelAI Prompt Manager
+# NaiPrompter
 
-NovelAI Prompt Manager は、NovelAI での画像生成を効率化するための Chrome 拡張機能です。プロンプトの管理、保存、そして簡単な再利用を可能にします。
+[日本語](README-ja.md)
 
-## 目次
+NaiPrompter is a Chrome extension designed to enhance the user experience of NovelAI by providing additional functionality for image generation.
 
-- [NovelAI Prompt Manager](#novelai-prompt-manager)
-  - [目次](#目次)
-  - [インストール](#インストール)
-  - [Quick Start](#quick-start)
-  - [設定](#設定)
-  - [スタイル](#スタイル)
-  - [その他の機能](#その他の機能)
-  - [更新履歴](#更新履歴)
+## Table of Contents
+- [NaiPrompter](#naiprompter)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Contributing](#contributing)
+  - [Changelog](#changelog)
+    - [20241015](#20241015)
     - [20240911](#20240911)
+  - [License](#license)
 
-## インストール
+## Features
 
-1. このリポジトリをクローンするか、ZIPファイルとしてダウンロードして解凍します。
-2. Google Chrome で `chrome://extensions` を開きます。
-3. 右上の「デベロッパーモード」をオンにします。
-4. 「パッケージ化されていない拡張機能を読み込む」をクリックします。
-5. 解凍したフォルダを選択します。
+- Generate multiple images at once
+- Save and manage custom styles
+- Temporary prompt and exclusion settings
+- Import and export styles
 
-これで、NovelAI Prompt Manager が Chrome に追加されます。
+## Installation
 
-## Quick Start
+1. Download the extension files
+2. Open Chrome and go to `chrome://extensions/`
+3. Enable "Developer mode" in the top right corner
+4. Click "Load unpacked" and select the folder containing the extension files
+ 
+For more detailed usage instructions, please click on the help icon for the extension and view the help screen.
 
-1. NovelAI のウェブサイトを開きます。
-2. Chrome の拡張機能アイコンから NovelAI Prompt Manager を開きます。
-3. 「一時的なプロンプト」欄にプロンプトを入力します。
-4. 「NovelAI に注入」ボタンをクリックして、入力したプロンプトを NovelAI に適用します。
-5. NovelAI の画像生成ボタンをクリックして、画像を生成します。
+## Usage
 
-## 設定
+1. Click on the NaiPrompter icon in your Chrome toolbar
+2. Set the number of images you want to generate
+3. Click "Generate" to start the process
 
-1. 拡張機能のポップアップ右上にある歯車アイコンをクリックして設定画面を開きます。
-2. 言語設定：日本語と英語の切り替えが可能です。
-3. その他の設定オプションについては、設定画面をご確認ください。
 
-## スタイル
+## Contributing
 
-スタイル機能を使用すると、よく使うプロンプトの組み合わせを保存し、簡単に呼び出すことができます。
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-1. 「スタイルタイトル」に名前を入力します。
-2. 「一時的なプロンプト」と「一時的な除外要素」にプロンプトを入力します。
-3. 「スタイルを保存」ボタンをクリックします。
-4. 保存したスタイルは「保存されたスタイル」リストに表示されます。
-5. スタイルを選択し、「スタイルを編集」ボタンをクリックすると、そのスタイルの内容を編集できます。
+## Changelog
 
-## その他の機能
-
-- **複数枚生成**: 指定した枚数の画像を連続して生成できます。
-- **プロンプトのクリア**: 現在のプロンプトをクリアします。
-- **NovelAI から取得**: 現在 NovelAI に設定されているプロンプトを取得します。
-- **スタイルのエクスポート/インポート**: スタイルをJSON形式でエクスポート/インポートできます。
-
-より詳細な使用方法については、拡張機能のヘルプアイコンをクリックしてヘルプ画面をご覧ください。
-
----
-
-ご不明な点や問題がございましたら、イシューを作成してお知らせください。
-## 更新履歴
+### 20241015
+Addition of a console, resolution of problems when running multiple times, and language support for English as standard
 
 ### 20240911  
-初回リリース向け、基本機能の実装、スタイルの保存と編集削除、複数選択と、一時プロンプトの組み合わせてで速やかなプロンプト作成と、複数回実行を行える機能の追加。
 For the first release, implementation of basic functions, saving and editing/deleting of styles, multiple selections and the ability to combine temporary prompts for quick prompt creation and multiple runs.
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
