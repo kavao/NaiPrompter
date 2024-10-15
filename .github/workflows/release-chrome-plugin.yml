@@ -1,0 +1,54 @@
+name: Release Chrome Plugin
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Get version number
+      id: get_version
+      run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/v}
+
+    - name: Update manifest file
+      run: |
+        sed -i 's/"version": ".*"/"version": "${{ steps.get_version.outputs.VERSION }}"/' src/manifest.json
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add src/manifest.json
+        git commit -m "Update to version ${{ steps.get_version.outputs.VERSION }}"
+        git push
+
+    - name: Create ZIP file
+      run: |
+        cd src
+        zip -r ../chrome-plugin-${{ steps.get_version.outputs.VERSION }}.zip . -x "*.git*"
+        cd ..
+
+    - name: Create release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ steps.get_version.outputs.VERSION }}
+        draft: false
+        prerelease: false
+
+    - name: Upload ZIP file
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./chrome-plugin-${{ steps.get_version.outputs.VERSION }}.zip
+        asset_name: chrome-plugin-${{ steps.get_version.outputs.VERSION }}.zip
+        asset_content_type: application/zip

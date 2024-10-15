@@ -1,0 +1,26 @@
+{
+    "1girl": {
+        "exclude": "",
+        "prompt": "1girl,sitting"
+    },
+    "_simple_negative": {
+        "exclude": "low quality,jpeg artifacts,signature,watermark,username,blurry,missing fingers,missing arms,Humpbacked,shadow",
+        "prompt": ""
+    },
+    "_reference sheet": {
+        "exclude": "",
+        "prompt": "{{reference sheet,front view,side view, back view}},tachi-e"
+    },
+    "_side view": {
+        "exclude": "",
+        "prompt": "{{side view, from side}},tachi-e"
+    },
+    "_front view": {
+        "exclude": "",
+        "prompt": "{{front view, straight-on }},tachi-e"
+    },
+    "_back view": {
+        "exclude": "",
+        "prompt": "{{back view, from behind}},tachi-e"
+    }
+}
