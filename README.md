@@ -17,6 +17,7 @@ NaiPrompter is a Chrome extension designed to enhance the user experience of Nov
   - [License](#license)
 
 ## Features
+![Screenshot](images/screenshot.png)
 
 - Generate multiple images at once
 - Save and manage custom styles
@@ -25,7 +26,7 @@ NaiPrompter is a Chrome extension designed to enhance the user experience of Nov
 
 ## Installation
 
-1. Download the extension files
+1.  Download and unzip the ZIP file deployed in this repository release.
 2. Open Chrome and go to `chrome://extensions/`
 3. Enable "Developer mode" in the top right corner
 4. Click "Load unpacked" and select the folder containing the extension files
